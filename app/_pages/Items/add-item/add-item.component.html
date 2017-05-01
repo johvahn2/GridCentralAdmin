@@ -1,0 +1,96 @@
+<div class="row container-cus">
+    <div class="col-lg-6">
+        <div class="card-box">
+            <h4 class="m-t-0 header-title"><b>Register New Item</b></h4>
+            <p class="text-muted font-13 m-b-30">
+                Adding new item to the database.
+            </p>
+                        
+            <div class="form-group">
+                <label for="ItemName">Item Name*</label>
+                <input type="text" parsley-trigger="change" [(ngModel)]="Item.Name" required placeholder="Enter Item Name" class="form-control input-Cus">
+            </div>
+            <div class="form-group">
+                <label for="description">Description*</label>
+                <textarea class="form-control input-Cus" rows="4" required [(ngModel)]="Item.Description" placeholder="Enter Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price*</label>
+                <div class="input-group m-t-10">
+                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                    <input type="number" id="example-input3-group1" [(ngModel)]="Item.Price" name="example-input3-group1" required class="form-control input-Cus" placeholder="00.00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pass1">Quantity*</label>
+                <input type="number" parsley-trigger="change" [(ngModel)]="Item.Quantity"  class="form-control input-Cus">
+            </div>
+            <div class="form-group">
+                <label for="passWord2">State*</label>
+                <input type="text" [(ngModel)]="Item.State" required placeholder="Item State" class="form-control input-Cus">
+            </div>
+            <div class="form-group">
+                <label for="category">Category*</label>
+                <select class="form-control" style="height: 3rem;"  [(ngModel)]="Item.Category" >
+                      <option *ngFor="let category of Categories" value="{{category}}">{{category}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Status*</label>
+                <select class="form-control" style="height: 3rem;"  [(ngModel)]="Item.Status" >
+                      <option *ngFor="let stat of Status" value="{{stat}}">{{stat}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Price Type*</label>
+                <select class="form-control" style="height: 3rem;"  [(ngModel)]="Item.PriceType" (ngModelChange)="PriceTypeChange($event)" >
+                      <option *ngFor="let type of PriceType" value="{{type}}">{{type}}</option>
+                </select>
+            </div>
+
+            <div *ngIf="isBid" class="form-group">
+                <label for="passWord2">End Date*</label>
+                <input type="date" class="form-control" [(ngModel)]="Item.BidEnding">
+            </div>
+
+            <div class="form-group">
+                <label for="passWord2">Image Amount*</label>
+                <input type="number" min="0" max="4" parsley-trigger="change" (ngModelChange)="ImageAction($event)" [(ngModel)]="ImageAmount"  class="form-control input-Cus">
+            </div>
+
+            <div *ngIf="ImageAmount > 0" class="form-group">
+                <label for="passWord2">Image 1</label>
+                <input name="file" type="file" (change)="readImage($event)"/>
+            </div>
+            <div *ngIf="ImageAmount > 1" class="form-group">
+                <label for="passWord2">Image 2</label>
+                <input name="file" type="file" (change)="readImage($event)"/>
+            </div>
+            <div *ngIf="ImageAmount > 2" class="form-group">
+                <label for="passWord2">Image 3</label>
+                <input name="file" type="file" (change)="readImage($event)"/>
+            </div>
+            <div *ngIf="ImageAmount > 3" class="form-group">
+                <label for="passWord2">Image 4</label>
+                <input name="file" type="file" (change)="readImage($event)"/>
+            </div>
+
+
+
+            <div class="form-group text-right m-b-0">
+                <button class="ladda-button btn btn-primary" (click)="RegisterItem()" data-style="expand-left">
+                    Submit
+                </button>
+                <div *ngIf="isLoading" class="progress">
+                    <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">
+                        <span class="sr-only">72% Complete</span>
+                    </div>
+                </div>
+                <alert *ngIf="isError" type="danger">{{mess}}</alert>
+               <alert *ngIf="isSuccess" type="success">{{mess}}</alert>
+            </div>
+        </div>
+    </div>
+</div>

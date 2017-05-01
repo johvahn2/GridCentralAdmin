@@ -1,0 +1,154 @@
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-box">
+          <div class="row">
+            <div class="col-sm-8">
+              <form role="form">
+                      <div class="form-group contact-search m-b-30">
+                          <input type="text" id="search" class="form-control searchbar" [(ngModel)]="searchTxt" (ngModelChange)="searchAction($event)" placeholder="Search..." [ngModelOptions]="{standalone: true}">
+                          <button type="submit" (click)="searchAction()" class="btn btn-white"><i class="fa fa-search"></i></button>
+                      </div> <!-- form-group -->
+              </form>
+            </div>
+            <div class="col-sm-4">
+                <a href="#custom-modal" class="btn btn-default btn-md waves-effect waves-light m-b-30" data-animation="fadein" data-plugin="custommodal" 
+                                        data-overlaySpeed="200" data-overlayColor="#36404a"><i class="md md-add"></i> Add Seller</a>
+            </div>
+          </div>
+          
+          <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="min-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                  <input id="action-checkbox" type="checkbox">
+                                  <label for="action-checkbox"></label>
+                              </div>
+                            </th>
+                            <th>DisplayName</th>
+                            <th>Email</th>
+                            <th>JoinedAt</th>
+                            <th style="min-width: 132px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let user of TableContent">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" checked="">
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{user.DisplayName}}</td>
+                                
+                                <td>{{user.Email}}</td>
+                                <td>{{user.createdAt}}</td>
+                                <td>
+                                  <a  class="table-action-btn"><i class="md md-edit" (click)="showModal(user,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="viewToken" (click)="viewToken(user.nToken,smModal)"></i></a>
+                                  <a  class="table-action-btn"><i class="md md-close" (click)="ShowDelete(sureModal,user)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+            
+        </div> <!-- end col -->      
+    </div>
+
+    <!--Modal-->
+    <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Edit User</h4>
+                <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Display Name</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="User.DisplayName" placeholder="Display Name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="User.Email" placeholder="Enter Email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="position">Full Name</label>
+                    <input type="text" class="form-control" id="position" [(ngModel)]="User.FullName" placeholder="Enter Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="position">Phone Number</label>
+                    <input type="text" class="form-control" id="position" [(ngModel)]="User.PhoneNumber" placeholder="Enter Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="position">Rank</label>
+                    <input type="text" class="form-control" id="position" [(ngModel)]="User.Rank" placeholder="Ranking">
+                </div>
+                <div class="form-group">
+                    <label for="position">New Password</label>
+                    <input type="text" class="form-control" id="position" [(ngModel)]="User.Password" placeholder="Enter New Password">
+                </div>
+                
+                <button type="submit" (click)="UpdateUser()" class="btn btn-default waves-effect waves-light">Save</button>
+                <button type="button" (click)="lgModal.hide()" class="btn btn-danger waves-effect waves-light m-l-10">Cancel</button>
+            </div>
+            <div *ngIf="isLoading" class="progress">
+                <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">
+                    <span class="sr-only">72% Complete</span>
+                </div>
+            </div>
+            <alert *ngIf="isError" type="danger">{{mess}}</alert>
+            <alert *ngIf="isSuccess" type="success">{{mess}}</alert>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Notice Token</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--<label [(ngModel)]="Token"></label>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #sureModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Deleting Ad</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="sureModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to <b style="color: red;">DELETE</b> this User</p>
+        <div class="row">
+
+            <button (click)="DeleteUser(smModal)" class="btn btn-default waves-effect waves-light">YES</button>
+            <button type="button" (click)="sureModal.hide()" class="btn btn-danger waves-effect waves-light m-l-10">NO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,471 @@
+   <div class="row">
+      <div class="col-lg-12">
+        <div class="card-box">
+            <div class="row">
+                <h4>Add New Ad</h4>
+                  <div class="form-group">
+                    <label>Location*</label>
+                    <select class="form-control" style="height: 3rem;"  [(ngModel)]="newTile.Location">
+                          <option *ngFor="let location of Locations" value="{{location}}">{{location}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <input type="text"  [(ngModel)]="newTile.Owner" class="form-control input-Cus">
+                  </div>
+                  <div class="form-group">
+                    <label for="owner">Name</label>
+                    <input type="text"  [(ngModel)]="newTile.Name" class="form-control input-Cus">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control input-Cus" rows="3" [(ngModel)]="newTile.Description" placeholder="Enter Description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Type*</label>
+                    <select class="form-control" style="height: 3rem;"  [(ngModel)]="newTile.Type">
+                          <option *ngFor="let type of Type" value="{{type}}">{{type}}</option>
+                    </select>
+                  </div>
+                  <!--<div class="form-group">
+                    <label for="ItemName">Image</label>
+                    <input name="file" type="file" (change)="selectImg($event)"/>  
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="ItemName">Image2</label>
+                    <img [src]="src" [hidden]="!src"/>
+                  </div>-->
+                  <div class="form-group">
+                    <label for="ItemName">Image</label>
+                    <input name="file" type="file" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions"/>  
+                  </div>
+
+                  <button (click)="Add_ad()" class="btn btn-default waves-effect waves-light">Add</button>                  
+                  <div *ngIf="isLoading" class="progress">
+                      <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">
+                          <span class="sr-only">72% Complete</span>
+                      </div>
+                  </div>
+                  <alert *ngIf="isError" type="danger">{{mess}}</alert>
+                  <alert *ngIf="isSuccess" type="success">{{mess}}</alert>
+            </div>
+        </div>
+            <br/>
+            <br/>
+            <!--Tile1-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 1
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              Show
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddedOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile1x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+
+            <!--Tile2-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 2
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                  Show
+                              </div>
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile2x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+
+            <!--Tile3-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 3
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                  Show
+                              </div>
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile3x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+
+            <!--Tile4-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 4
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                  Show
+                              </div>
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile4x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+
+            <!--Tile5-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 5
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                  Show
+                              </div>
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile5x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+
+            <!--Tile6-->
+            <div class="row">
+
+              <accordion-group #group>
+                <div accordion-heading>
+                  Tile 6
+                  <i class="pull-right float-xs-right glyphicon"
+                    [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div>
+                 <div class="cus-table table-responsive">
+                    <table class="table table-hover mails m-0 table table-actions-bar">
+                      <thead style="background-color: #d4d4d4;">
+                          <tr>
+                            <th style="max-width: 95px;">
+                              <div class="checkbox checkbox-primary checkbox-single m-r-15">
+                                 Show
+                              </div>
+                            </th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>AddOn</th>
+                            <th style="min-width: 135px;">Action</th>
+                          </tr>
+                      </thead>
+  
+                        <tbody>
+                            <tr *ngFor="let item of Tile6x">
+                                <td>
+                                  <div class="checkbox checkbox-primary m-r-15">
+                                      <input id="checkbox2" type="checkbox" [checked]="item.Show" (change)="ShowAdChg(item)"/>
+                                      <label for="checkbox2"></label>
+                                  </div>                                   
+                                </td>
+                                
+                                <td>{{item.Name}}</td>
+                                
+                                <td>{{item.Owner}}</td>
+                                <td>{{item.Type}}</td>
+                                <td>{{item.AddedOn}}</td>
+                                <td>
+                                  <a class="table-action-btn"><i class="md md-edit" (click)="editTile(item,lgModalEdit)"></i></a>
+                                  <a class="table-action-btn"><i class=" md-now-wallpaper" (click)="viewImage(item.Image,lgModal)"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="showDeleteModal(item,smModal)"></i></a>
+                                </td>
+                            </tr>                       
+                        </tbody>
+                    </table>
+                  </div>                   
+                </div>
+              </accordion-group>             
+            </div>
+      </div>
+    </div>
+
+
+
+<div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Deleting Ad</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to <b style="color: red;">DELETE</b> this Ad</p>
+        <div class="row">
+
+            <button (click)="DeleteAd(smModal)" class="btn btn-default waves-effect waves-light">YES</button>
+            <button type="button" (click)="smModal.hide()" class="btn btn-danger waves-effect waves-light m-l-10">NO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Image View</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img [src]="viewImg" height="700" width="700">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #lgModalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Image View</h4>
+        <button type="button" class="close pull-right" (click)="lgModalEdit.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+          <label>Location*</label>
+          <select class="form-control" style="height: 3rem;"  [(ngModel)]="TileEdit.Parent">
+                <option *ngFor="let location of Locations" value="{{location}}">{{location}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="owner">Owner</label>
+          <input type="text"  [(ngModel)]="TileEdit.Owner" class="form-control input-Cus">
+        </div>
+        <div class="form-group">
+          <label for="owner">Name</label>
+          <input type="text"  [(ngModel)]="TileEdit.Name" class="form-control input-Cus">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control input-Cus" rows="3" [(ngModel)]="TileEdit.Description" placeholder="Enter Description"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Type*</label>
+          <select class="form-control" style="height: 3rem;"  [(ngModel)]="TileEdit.Type">
+                <option *ngFor="let type of Type" value="{{type}}">{{type}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ItemName">Image</label>
+          <img [src]="TileEdit.Image"/>
+        </div>
+
+        <button (click)="Update_ad()" class="btn btn-default waves-effect waves-light">Update</button>                  
+        <div *ngIf="isLoading" class="progress">
+            <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">
+                <span class="sr-only">72% Complete</span>
+            </div>
+        </div>
+        <alert *ngIf="isError" type="danger">{{mess}}</alert>
+        <alert *ngIf="isSuccess" type="success">{{mess}}</alert>       
+      </div>
+    </div>
+  </div>
+</div>

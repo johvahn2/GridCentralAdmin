@@ -209,7 +209,7 @@ Update_ad(){
     var parser = document.createElement('a');
     parser.href = mi;
     this.perpareDelete.Image = parser.pathname.split('/')[4];
-
+    console.log(this.perpareDelete);
     this.adService.DeleteAd(this.perpareDelete)
     .subscribe(data=>{
       console.log(data);

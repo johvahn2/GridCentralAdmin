@@ -138,19 +138,19 @@
 
             <div *ngIf="ImageAmount > 0" class="form-group">
                 <label for="passWord2">Image 1</label>
-                <input name="file" type="file" imageUpload (imageSelected)="readImage($event)" [resizeOptions]="resizeOptions"/>  
+                <input name="file" type="file" imageUpload (imageSelected)="ereadImage1($event)" [resizeOptions]="resizeOptions"/>  
             </div>
             <div *ngIf="ImageAmount > 1" class="form-group">
                 <label for="passWord2">Image 2</label>
-                <input name="file" type="file" imageUpload (imageSelected)="readImage($event)" [resizeOptions]="resizeOptions"/>  
+                <input name="file" type="file" imageUpload (imageSelected)="ereadImage2($event)" [resizeOptions]="resizeOptions"/>  
             </div>
             <div *ngIf="ImageAmount > 2" class="form-group">
                 <label for="passWord2">Image 3</label>
-                <input name="file" type="file" imageUpload (imageSelected)="readImage($event)" [resizeOptions]="resizeOptions"/>  
+                <input name="file" type="file" imageUpload (imageSelected)="ereadImage3($event)" [resizeOptions]="resizeOptions"/>  
             </div>
             <div *ngIf="ImageAmount > 3" class="form-group">
                 <label for="passWord2">Image 4</label>
-                <input name="file" type="file" imageUpload (imageSelected)="readImage($event)" [resizeOptions]="resizeOptions"/>  
+                <input name="file" type="file" imageUpload (imageSelected)="ereadImage4($event)" [resizeOptions]="resizeOptions"/>  
             </div>
 
         <div class="row">

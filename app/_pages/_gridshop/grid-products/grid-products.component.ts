@@ -113,6 +113,7 @@ export class GridProductsComponent{
 
       this.isError = false;
       this.isLoading = true;
+      this.CheckBytes();
       console.log(this.Item);
       this.gridproductSerivce.AddItem(this.Item)
       .subscribe(data=>{
@@ -134,10 +135,10 @@ export class GridProductsComponent{
     
   }
 
-  UpdateProduct(){//Not Working
+  UpdateProduct(){
+
     this.isLoading = true;
     this.CheckBytes();
-
     for(var i=0;i < this.eItem.Images.length;i++){
       if(this.eItem.Images[i] != null){
           var mi = this.eItem.Images[i];
@@ -311,6 +312,7 @@ export class GridProductsComponent{
 
     this.eItem.bImages = bImages;
     this.eItem.Images = curr_images;
+    this.Item.bImages = bImages;
   }
 
 
@@ -387,6 +389,8 @@ export class GridProductsComponent{
       3000);
     })
   }
+
+
   ShowDeleteQ(item,DeleteQModal){
     this.prepareDeleteQ = item;
     DeleteQModal.show();

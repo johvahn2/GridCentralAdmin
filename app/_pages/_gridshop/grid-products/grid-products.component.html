@@ -170,8 +170,7 @@
 
   </div>
 
-
-<div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -194,6 +193,7 @@
 
 
 
+
     <div bsModal #lgModalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="overflow: scroll;">
@@ -204,6 +204,13 @@
             </button>
         </div>
         <div class="modal-body">
+
+            <div class="form-group m-b-20">
+                <label class="m-b-15">is Deal? <span class="text-danger">*</span></label>
+                <select class="form-control" style="height: 3rem;"  [(ngModel)]="eItem.isDeal">
+                      <option *ngFor="let type of DealOption" value="{{type}}">{{type}}</option>
+                </select>
+            </div>
 
             <div class="form-group m-b-20">
                 <label>Product name <span class="text-danger">*</span></label>

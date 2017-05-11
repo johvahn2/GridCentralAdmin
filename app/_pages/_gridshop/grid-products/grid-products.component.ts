@@ -25,6 +25,7 @@ export class GridProductsComponent{
   isBid:any = false;
   Categories:any;
   PriceType:any;
+  DealOption:any;
   Status:any;
   ImageAmount:any=0;
   isLoading:any=false;isError:any=false;isSuccess:any=false;
@@ -236,6 +237,7 @@ export class GridProductsComponent{
         Status:"",
         PriceType:"",
         BidEnding:"",
+        isDeal:"False",
         State:"",
         Category:"",
         bImages:[]
@@ -248,6 +250,7 @@ export class GridProductsComponent{
         Quantity:"",
         CreatedBy:"admin@grid.com",
         Status:"",
+        isDeal:"",
         PriceType:"",
         BidEnding:"",
         State:"",
@@ -262,6 +265,9 @@ export class GridProductsComponent{
 
       this.PriceType =[
         "Fixed","Bid"
+      ]
+      this.DealOption=[
+        "True","False"
       ]
 
       this.getList();
@@ -389,6 +395,7 @@ export class GridProductsComponent{
       3000);
     })
   }
+
 
 
   ShowDeleteQ(item,DeleteQModal){

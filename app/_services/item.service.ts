@@ -32,7 +32,18 @@ export class ItemService {
 
     }
 
-        updateItem(Info){
+    deleteItem(Info){
+        return this.http.delete(Const.Main_Url+"/item/delete/"+Info)
+            .map((response:Response)=>{
+                let data = response.json();
+                return data;
+            })
+    
+    }
+
+    
+
+    updateItem(Info){
         return this.http.post(Const.Main_Url+"/admin-item/update-item",JSON.stringify(Info),{headers: this.contentHeader})
             .map((response:Response)=>{
                 let data = response.json();

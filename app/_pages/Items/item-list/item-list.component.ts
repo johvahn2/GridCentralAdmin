@@ -21,7 +21,7 @@ export class ItemListComponent {
   Categories:any;
   PriceType:any;
   Status:any;
-
+  prepareDelete:any;
   item:any;
 
   bImages:any[];
@@ -78,7 +78,34 @@ export class ItemListComponent {
     })
   }
 
+  ShowDelete(sureModal,item){
+    this.prepareDelete = item;
+    sureModal.show();
+  }
 
+    DeleteItem(smModal){
+    this.isError = false;
+    this.isLoading = true;
+
+    this.itemService.deleteItem(this.prepareDelete._id)
+    .subscribe(data=>{
+      if(data.status == "true"){
+        this.mess = data.mess;
+        this.isSuccess = true;
+      }else{
+        this.mess = data.mess;
+        this.isError = true;
+      }
+      this.isLoading = false;
+      setTimeout(() => 
+      {
+        this.isSuccess = false;
+      },
+      3000);
+    })
+
+    smModal.hide();
+  }
 showModal(item:any,lgModal:any) {
 
   lgModal.show();
@@ -140,6 +167,23 @@ Initilze(){
       bImages:[],
       Images:[],
     }
+
+    this.prepareDelete= {
+      _id:"",
+      Name:"",
+      Description:"",
+      Price:"",
+      Quantity:"",
+      CreatedBy:"",
+      Status:"",
+      PriceType:"",
+      BidEnding:"",
+      State:"",
+      Category:"",
+      bImages:[],
+      Images:[],
+    }
+
 
     this.bImages =[];
 

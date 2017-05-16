@@ -48,13 +48,20 @@
                                 <td>{{item.CreatedBy}}</td>
                                 <td>
                                   <a class="table-action-btn"><i class="md md-edit" (click)="showModal(item,lgModal)"></i></a>
-                                  <a href="#" class="table-action-btn"><i class="md md-close"></i></a>
+                                  <a class="table-action-btn"><i class="md md-close" (click)="ShowDelete(sureModal,item)"></i></a>
                                 </td>
                             </tr>                       
                         </tbody>
                     </table>
                 </div>
             </div>
+        <div *ngIf="isLoading" class="progress">
+            <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width: 72%;">
+                <span class="sr-only">72% Complete</span>
+            </div>
+        </div>
+        <alert *ngIf="isError" type="danger">{{mess}}</alert>
+        <alert *ngIf="isSuccess" type="success">{{mess}}</alert>
         </div> <!-- end col -->      
     </div>
 
@@ -168,3 +175,23 @@
 
   </div>
 
+<div bsModal #sureModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Deleting Ad</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="sureModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to <b style="color: red;">DELETE</b> this Item</p>
+        <div class="row">
+
+            <button (click)="DeleteItem(sureModal)" class="btn btn-default waves-effect waves-light">YES</button>
+            <button type="button" (click)="sureModal.hide()" class="btn btn-danger waves-effect waves-light m-l-10">NO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

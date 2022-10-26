@@ -1,3 +1,3 @@
-Version 1 of GridCentral app, Content Management System.
+Version 1 of GridCentral Mobile App Content Management System.
 
-The CMS is able to manage all the functions of the ecommerce mobile application
+The CMS is able to manage all functions of the ecommerce mobile application
